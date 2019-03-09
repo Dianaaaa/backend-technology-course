@@ -3,7 +3,6 @@ package com.retell.wordladder.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.core.io.ClassPathResource;
@@ -22,8 +21,8 @@ public class WordladderController {
         return "index";
     }
 
-    @RequestMapping(value="/word-ladder",method= RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public ResponseEntity<String> outputWordLadder(String word1, String word2){
+    @RequestMapping(value="/word-ladder",method= RequestMethod.GET)
+    public String outputWordLadder(String word1, String word2, Model model){
         String worldLadder =" ";
         ClassPathResource dictPath = new ClassPathResource("static/dictionary.txt");
         try {
@@ -34,6 +33,7 @@ public class WordladderController {
         catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        return new ResponseEntity<String>(worldLadder, HttpStatus.OK);
+        model.addAttribute("ladder", worldLadder.toString());
+        return "index";
     }
 }
