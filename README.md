@@ -16,4 +16,5 @@ A repo for homework of SE418 and SE420.
 - WordLadderApplicationTests.java: the unit test
 
 ## Final result
+![result](./word-ladder/src/main/resources/static/img/result.png)
 
