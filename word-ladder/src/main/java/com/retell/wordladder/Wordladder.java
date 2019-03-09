@@ -72,9 +72,7 @@ public class Wordladder {
                             if (this.isContained(newWord) && (!wordUsed.contains(newWord))) {
                                 wordUsed.add(newWord);
                                 Stack<String> newLadder = (Stack<String>)ladder.clone();
-                                System.out.println(ladderToString(newLadder));
                                 newLadder.add(newWord);
-                                System.out.println(ladderToString(newLadder));
                                 wordQue.offer(newLadder);
                                 if (newWord.equals(word1)) {
                                     resultLadder = newLadder;
