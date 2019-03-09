@@ -1,4 +1,4 @@
-package com.retell.wordladder;
+package com.retell.wordladder.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

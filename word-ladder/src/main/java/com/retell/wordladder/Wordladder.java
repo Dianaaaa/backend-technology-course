@@ -1,13 +1,27 @@
 package com.retell.wordladder;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.HashSet;
+import java.io.FileReader;
 
-@RestController
 public class Wordladder {
-    @RequestMapping(value="/wordladder",method= RequestMethod.GET)
-    public String outputWordLadder(){
-        return "hello wordladder";
+    private String dictFilePath = null;
+    private HashSet<String> dictSet = new HashSet<String>();
+    public Wordladder(String dictFilePath){
+        this.dictFilePath = dictFilePath;
+        try {
+            BufferedReader readfile = new BufferedReader(new FileReader(dictFilePath));
+            String tempString = null;
+            while ((tempString = readfile.readLine()) != null) {
+                this.dictSet.add(tempString);
+            }
+            readfile.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
+
 }
