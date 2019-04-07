@@ -19,7 +19,7 @@ import java.io.*;
 
 import com.retell.wordladder.Wordladder;
 
-
+@CrossOrigin
 @RestController
 public class WordladderController {
     @RequestMapping(value="/", method=RequestMethod.GET)
