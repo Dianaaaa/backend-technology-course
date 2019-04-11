@@ -61,3 +61,18 @@ The two words should obey following rules:
 ## Final result
 ![result](./src/main/resources/static/img/result.png)
 
+
+
+## Using actuator to monitor apis
+
+### Actuator url：localhost:8080/monitor/****:
+
+- /health: to check whether this app is "healthy".
+- /info: to get self-defined information of this app.
+- /beans: to get the information of beans.
+- /conditions: to check when a configuration is applied.
+- /shutdown: to shutdown this app gracefully (amazing! use post method!).
+- /mappings: to get the mapping information of urls and controllers. 
+
+
+
