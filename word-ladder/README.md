@@ -65,7 +65,9 @@ The two words should obey following rules:
 
 ## Using actuator to monitor apis
 
-### Actuator url：localhost:8080/monitor/****:
+### Actuator url：localhost:8080/monitor/**:
+
+!You should log in to get access to these information since I have added these pages to Spring Security.
 
 - /health: to check whether this app is "healthy".
 - /info: to get self-defined information of this app.
@@ -75,4 +77,15 @@ The two words should obey following rules:
 - /mappings: to get the mapping information of urls and controllers. 
 
 
+
+## Spring Security
+
+I defined two users:
+
+- username: user 	password: 123456
+- username: admin     password: 654321
+
+You can check the login functionality on the url "localhost:8080/user". Once you successfully log in, the window will display "Hello Spring Security".
+
+I also add a login page in the front end. You can also log in from the front-end. It will get and store the session.
 

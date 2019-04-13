@@ -1,12 +1,9 @@
 package com.retell.wordladder.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.web.bind.annotation.RestController;
 
 import org.json.simple.JSONObject;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.io.*;
 
@@ -15,6 +12,11 @@ import com.retell.wordladder.Wordladder;
 @CrossOrigin
 @RestController
 public class WordladderController {
+    @RequestMapping(value="/user", method=RequestMethod.GET)
+    public String getUsers() {
+        return "Hello Spring Security";
+    }
+
     @RequestMapping(value="/word-ladder",method= RequestMethod.GET)
     public String outputWordLadder(String word1, String word2){
         String worldLadder =" ";

@@ -21,7 +21,7 @@ class Wordladder extends Component {
       path, {
         method:'GET',
         // body: {'name': "机器学习"},
-        // mode:'no-cors'
+        mode:'no-cors'
       }).then((response) => {
         response.json().then((data) => {
           console.log(data);
