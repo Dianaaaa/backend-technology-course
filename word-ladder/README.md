@@ -67,9 +67,9 @@ The two words should obey following rules:
 
 ### Actuator url：localhost:8080/monitor/**:
 
-!You should log in to get access to these information since I have added these pages to Spring Security.
+Since the spring security is added, you need to login as the "ADMIN" role. (username and password are provided in the next section.)
 
-- /health: to check whether this app is "healthy".
+-  /health: to check whether this app is "healthy".
 - /info: to get self-defined information of this app.
 - /beans: to get the information of beans.
 - /conditions: to check when a configuration is applied.
@@ -85,7 +85,9 @@ I defined two users:
 - username: user 	password: 123456
 - username: admin     password: 654321
 
-You can check the login functionality on the url "localhost:8080/user". Once you successfully log in, the window will display "Hello Spring Security".
+Log in as "user" to get permission to the word-ladder api, and admin to get permission to the "actuator" pages.
 
-I also add a login page in the front end. You can also log in from the front-end. It will get and store the session.
+If you haven't logged in and access the protected urls, the window will display "Hello Spring Security".
+
+p.s: The front-end is not available after using spring security, you'd better use Postman. And thanks to the help from tx19980520.
 

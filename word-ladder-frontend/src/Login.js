@@ -14,12 +14,11 @@ class Login extends Component {
         fetch(
           path, {
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'withCredentials': 'ture'
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
             method:'POST',
             body: {'username': username, "password": password},
-            mode:'no-cors'
+            mode:'no-cors'              //解决跨域问题
           }).then((response) => {
               console.log(response);
             // response.json().then((data) => {

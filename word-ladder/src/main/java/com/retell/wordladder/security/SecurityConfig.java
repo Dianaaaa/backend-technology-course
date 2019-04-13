@@ -1,16 +1,13 @@
 package com.retell.wordladder.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -35,19 +32,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .passwordEncoder(new BCryptPasswordEncoder())
-                .withUser("admin").password(new BCryptPasswordEncoder().encode("admin")).roles("ADMIN")
+                .withUser("admin").password(new BCryptPasswordEncoder().encode("654321")).roles("ADMIN")
                 .and()
-                .withUser("user").password(new BCryptPasswordEncoder().encode("user")).roles("USER");
+                .withUser("user").password(new BCryptPasswordEncoder().encode("123456")).roles("USER");
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+
         http
                 .cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login", "/login_page").permitAll()
-                .antMatchers("/api/*").hasRole("USER")
-                .antMatchers("/actuator/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.OPTIONS).permitAll()
+                .antMatchers("/login", "/user").permitAll()
+                .antMatchers("/monitor/**").hasRole("ADMIN")
+                .antMatchers("/word-ladder").hasRole("USER")
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                 .permitAll()
                 .antMatchers("/")
@@ -55,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**")
                 .authenticated()
                 .and()
-                .formLogin().loginPage("/login")
+                .formLogin().loginPage("/user")
                 .successHandler(new AuthenticationSuccessHandler() {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -78,12 +77,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         httpServletResponse.setContentType("application/json;charset=utf-8");
                         PrintWriter out = httpServletResponse.getWriter();
                         System.out.println("password:"+httpServletRequest.getParameter("password"));
-                        out.write("{\"status\":\"error\",\"msg\":\""+e.getCause()+"\"}");
+                        out.write("{\"status\":\"error\",\"msg\":\""+e.getMessage()+"\"}");
                         out.flush();
                         out.close();
                     }
                 })
-                .loginProcessingUrl("/login_login")
+                .loginProcessingUrl("/login")
                 .usernameParameter("username").passwordParameter("password").permitAll()
                 .and()
                 .logout()
@@ -101,20 +100,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 })
                 .clearAuthentication(true)
                 .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
-                .and()
-                .sessionManagement().maximumSessions(1).maxSessionsPreventsLogin(true);
-
+                .deleteCookies("JSESSIONID");
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-
-        User.UserBuilder users = User.withDefaultPasswordEncoder();
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(users.username("user").password("123456").roles("USER").build());
-        manager.createUser(users.username("admin").password("654321").roles("USER", "ADMIN").build());
-        return manager;
-
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//
+//        User.UserBuilder users = User.withDefaultPasswordEncoder();
+//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+//        manager.createUser(users.username("user").password("123456").roles("USER").build());
+//        manager.createUser(users.username("admin").password("654321").roles("USER", "ADMIN").build());
+//        return manager;
+//
+//    }
 }
