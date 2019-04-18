@@ -21,15 +21,16 @@ class Wordladder extends Component {
       path, {
         method:'GET',
         // body: {'name': "机器学习"},
-        mode:'no-cors'
+        // mode:'no-cors'
+        credentials: 'include'
       }).then((response) => {
         console.log(response)
-        // response.json().then((data) => {
-        //   console.log(data);
-        //   this.setState(() => ({
-        //     wordladder: data['wordladder'],
-        //   }))
-        // });
+        response.json().then((data) => {
+          console.log(data);
+          this.setState(() => ({
+            wordladder: data['wordladder'],
+          }))
+        });
       })
       .catch(e => console.log('错误:', e)
       )

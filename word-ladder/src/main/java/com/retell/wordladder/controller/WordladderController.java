@@ -9,7 +9,7 @@ import java.io.*;
 
 import com.retell.wordladder.Wordladder;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class WordladderController {
     @RequestMapping(value="/user", method=RequestMethod.GET)

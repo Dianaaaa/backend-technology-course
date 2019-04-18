@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
 import './Login.css'
 
 class Login extends Component {
@@ -10,6 +11,10 @@ class Login extends Component {
         console.log(username)
         console.log(password)
         let path = 'http://localhost:8080/login';
+        const formData = new URLSearchParams();
+        formData.append('username', username);
+        formData.append('password', password);
+        console.log(formData.toString())
         console.log(path)
         fetch(
           path, {
@@ -17,16 +22,15 @@ class Login extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             method:'POST',
-            body: {'username': username, "password": password},
-            mode:'no-cors'              //解决跨域问题
+            body: formData.toString(),
+            credentials: 'include'         //解决跨域问题
           }).then((response) => {
-              console.log(response);
-            // response.json().then((data) => {
-            //   console.log(data);
-            //   this.setState(() => ({
-            //     wordladder: data['wordladder'],
-            //   }))
-            // });
+              console.log(response)
+              if (response.status === 200) {
+                this.props.history.push("/word-ladder")
+              } else {
+                  console.log("error")
+              }
           })
           .catch(e => console.log('错误:', e)
           )
@@ -78,4 +82,4 @@ class Login extends Component {
 
 }
 
-export default Login
+export default withRouter(Login)
