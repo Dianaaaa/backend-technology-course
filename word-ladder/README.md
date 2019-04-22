@@ -89,6 +89,8 @@ Log in as "user" to get permission to the word-ladder api, and admin to get perm
 
 If you haven't logged in and access the protected urls, the window will display "Hello Spring Security".
 
-p.s: The front-end is not available after using spring security, you'd better use Postman. And thanks to the help from tx19980520.
+p.s: Thanks to the help from tx19980520.
 
-Have fun！
+## Integrated with the frontend
+
+Run the backend and the frontend. Firstly you need to log in in "http://localhost:3000" as the user role. After that the window will be directed to "http://localhost:3000/word-ladder", and you can generate a word ladder as you wish.
