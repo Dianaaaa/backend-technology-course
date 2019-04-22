@@ -10,3 +10,7 @@ A spring boot app of a word-ladder generator. See more details in /word-ladder/R
 ### 2.1 Task1
 Invesgating the use of "F12" in browsers.
 
+### 2.2 Task2
+
+Explore the cpu and memory consumption of Word Ladder backend.
+
