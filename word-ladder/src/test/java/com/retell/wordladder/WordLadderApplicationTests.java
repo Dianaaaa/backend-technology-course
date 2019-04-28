@@ -19,8 +19,7 @@ public class WordLadderApplicationTests {
     public WordLadderApplicationTests() {
         ClassPathResource dictPath = new ClassPathResource("static/dictionary.txt");
         try {
-            String dictFilePath = dictPath.getFile().getAbsolutePath();
-            ladder = new Wordladder(dictFilePath);
+            ladder = new Wordladder(dictPath.getInputStream());
         }catch (IOException e) {
             System.out.println(e.getMessage());
         }

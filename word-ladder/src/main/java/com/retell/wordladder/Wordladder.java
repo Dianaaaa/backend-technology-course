@@ -1,25 +1,24 @@
 package com.retell.wordladder;
 
-import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashSet;
-import java.io.FileReader;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
 public class Wordladder {
-    private String dictFilePath = null;
+    private InputStream input;
     private HashSet<String> dictSet = new HashSet<String>();
-    public Wordladder(String dictFilePath){
-        this.dictFilePath = dictFilePath;
+    public Wordladder(InputStream input){
+        this.input = input;
+        StringBuilder jsonString = new StringBuilder();
         try {
-            BufferedReader readfile = new BufferedReader(new FileReader(dictFilePath));
+            InputStreamReader reader =  new InputStreamReader(this.input);
+            BufferedReader bufferedReader = new BufferedReader(reader);
             String tempString = null;
-            while ((tempString = readfile.readLine()) != null) {
+            while ((tempString = bufferedReader.readLine()) != null) {
                 this.dictSet.add(tempString);
             }
-            readfile.close();
         }
         catch(IOException e){
             e.printStackTrace();

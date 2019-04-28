@@ -14,3 +14,6 @@ Invesgating the use of "F12" in browsers.
 
 Explore the cpu and memory consumption of Word Ladder backend.
 
+### 2.3 Task3
+
+Deploy the word-ladder app onto Docker.
