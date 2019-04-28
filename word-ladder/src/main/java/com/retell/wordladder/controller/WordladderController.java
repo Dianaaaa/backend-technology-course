@@ -22,8 +22,7 @@ public class WordladderController {
         String worldLadder =" ";
         ClassPathResource dictPath = new ClassPathResource("static/dictionary.txt");
         try {
-            String dictFilePath = dictPath.getFile().getAbsolutePath();
-            Wordladder ladder = new Wordladder(dictFilePath);
+            Wordladder ladder = new Wordladder(dictPath.getInputStream());
             worldLadder = ladder.genLadder(word1, word2);
         }
         catch (IOException e) {
