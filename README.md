@@ -17,3 +17,7 @@ Explore the cpu and memory consumption of Word Ladder backend.
 ### 2.3 Task3
 
 Deploy the word-ladder app onto Docker.
+
+### 2.4 Task4
+
+Divide the word-ladder project into two Microservice: the log-in component and the word-ladder generator component and dockerize them. 
