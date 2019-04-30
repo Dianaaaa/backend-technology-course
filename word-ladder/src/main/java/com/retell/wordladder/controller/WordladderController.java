@@ -9,7 +9,7 @@ import java.io.*;
 
 import com.retell.wordladder.Wordladder;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:8000")
 @RestController
 public class WordladderController {
     @RequestMapping(value="/user", method=RequestMethod.GET)
@@ -17,8 +17,8 @@ public class WordladderController {
         return "Hello Spring Security";
     }
 
-    @RequestMapping(value="/word-ladder",method= RequestMethod.GET)
-    public String outputWordLadder(String word1, String word2){
+    @RequestMapping(value="/word-ladder/{word1}/{word2}",method= RequestMethod.GET)
+    public JSONObject outputWordLadder(@PathVariable String word1,@PathVariable String word2){
         String worldLadder =" ";
         ClassPathResource dictPath = new ClassPathResource("static/dictionary.txt");
         try {
@@ -31,7 +31,7 @@ public class WordladderController {
 
         JSONObject result = new JSONObject();
         result.put("wordladder", worldLadder.toString());
-        return result.toJSONString();
+        return result;
     }
 
     /********Template solution*****************/

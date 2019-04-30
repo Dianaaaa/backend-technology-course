@@ -15,7 +15,7 @@ class Wordladder extends Component {
     let word2 = this.input2.value
     console.log(word1)
     console.log(word2)
-    let path = 'http://localhost:8080/word-ladder?word1=' + word1 + '&word2=' + word2;
+    let path = 'http://localhost:8080/ask/' + word1 + '/' + word2;
     console.log(path)
     fetch(
       path, {
